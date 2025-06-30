@@ -2,11 +2,13 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+//esse componente e da interface de edicao do produto
 const EditBook= ()=>{
-    const location = useLocation();
-    const { itensinfor } = location.state || {}
-    const navigate = useNavigate()
+    const location = useLocation()//hook para navegacao
+    const { itensinfor } = location.state || {}//as informacoes sao passadas na url. quando o usuario clica em editar, as informacoes vai para a ulr e quando a rota muda para a interface de edicao, essa interface captura as informacoes e adiciona nesse objeto
+    const navigate = useNavigate()//hook de navegacao quando determinada acao for finalizada
 
+    //class que representa o produto e armazena novas as informacoes do proprio produto
     class objectDataProduct{
         id            :  number | null;
         emailUser     :  string | null;
@@ -28,42 +30,52 @@ const EditBook= ()=>{
         }
     }
 
+    //instancia o objeto para utilizalo nos botoes e atualizar as informacoes
     const objectProduct= new objectDataProduct(null, '', '', '', null, '', '')
 
+    //atualiza o nome do autor
     const validNameAutor=(e: any)=>{
         objectProduct.nameAutorBook= e.target.value
     }
 
+    //atualiza o tituli do livro
     const validTituloBook= (e: any)=>{
         objectProduct.titleBook= e.target.value
     }
 
+    //atualiza o preco do livro
     const validPriceBook= (e: any)=>{
         objectProduct.priceBook= e.target.value
     }
 
+    //atualiza a descricao do livro
     const validDescriptionBook= (e: any)=>{
         objectProduct.descriptionBook= e.target.value
     }
 
+    //atualiza a imagem do livro
     const validimgBook= (e: any)=>{
         objectProduct.imgBook= e.target.value
     }
 
 
-    const sendInformation= async (e: any, i : any)=>{
-        axios.post(`http://localhost:3000/EditeProduct?id=${itensinfor.id}&whatchInfor=${e}&information=${i}`).then((response)=>{
+    //apos as informacoes serem atualizada e colocada em sua perspectiva chave valor no objeto, e feita uma comunicacao
+    //como a api enviado ao edpoint o id do produto, a acao a ser feita e o dado a ser atualizado.
+    const sendInformation= async (e: any, dataUpdate : any)=>{//o dataUpdate e o valor na chave passada como argumento e "e" e o tipo de acao a ser feita na api
+        axios.post(`http://localhost:3000/EditeProduct?id=${itensinfor.id}&whatchInfor=${e}&information=${dataUpdate}`).then((response)=>{
             console.warn(response)
         }).catch((err)=>{
             console.error(err)
         })
     }
 
-    //deletar item 
+    //deletar item. Assim como na edicao para deletar e precisa enviar o id e a acao a ser feita. Porem nem um dado 
+    //de edicao e enviado, ao invez disso e enviado id do produto no "information" para respeitar a ordem da api
+    //e deletar o item 
     const deleteitenincart= (infor: string, id: number | null)=>{
             axios.post(`http://localhost:3000/EditeProduct?id=${itensinfor.id}&whatchInfor=${infor}&information=${id}`).then((response)=>{
                 console.warn(response)
-                navigate('/')
+                navigate('/')//assim que o item for deletado a inteface e modificada para a interface de 'Home'
             })
     
     }

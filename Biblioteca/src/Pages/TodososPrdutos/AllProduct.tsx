@@ -1,6 +1,9 @@
 import axios from "axios"
 import { useEffect, useState, useContext } from "react"
 import DataCostum from "../../Settings/Custum"
+
+
+//tipagem dos objetos que representam os produtos
 type itensJson = {
     id            :  number, 
     emailUser     :  string,
@@ -11,23 +14,26 @@ type itensJson = {
     imgBook        : string
 }
 
+//interface que vai apresentar todos os produtos ao cliente ou visitante
 const Allproducts= ()=>{
-    const [itens, setItens] =useState <itensJson []>([])
-    const {EmailUser}= useContext(DataCostum)
+    const [itens, setItens] =useState <itensJson []>([])//armazena os produtos recebido na requisicao
+    const {EmailUser}= useContext(DataCostum)//pega o email do usuario 
 
+    //faz uma requisicao para o edpoint geral para pegar o produtos
     useEffect(()=>{
         axios.get(`http://localhost:3000/`).then((response)=>{
             setItens(response.data[0])
         }).catch((err)=>{
             console.error(err)
         })
-    }, [])//vai ser acionando na entrada da pagina
+    }, [])//vai ser acionando na entrada da rota
 
 
+    //adiciona ao carrinho se o usuario estiver cadastrado caso contrario e apresentado uma mensagem de "usuario nao cadastrado"
     const AddinCart= async (id: number)=>{
         if(EmailUser !== ''){
             axios.post(`http://localhost:3000/addincart`, {product_id: id, emailUser: EmailUser}).then((response)=>{
-            console.log(response)
+            console.warn(response)
             }).catch((err)=>{
                 console.error(err)
             })
