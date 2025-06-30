@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+//tabela dos produtos
+model inforbook {
+  id              Int      @id @default(autoincrement())
+  emailUser       String?  @db.VarChar(50)
+  nameAutorBook   String   @db.VarChar(20)
+  titleBook       String?  @db.VarChar(100)
+  priceBook       Decimal? @db.Decimal(10, 2)
+  descriptionBook String   @db.Text
+  imgBook         String?  @db.VarChar(255)
+  carts           cart[]
+}
+
+//tabela de carrinho
+model cart {
+  id              Int      @id @default(autoincrement())
+  emailUser       String?  @db.VarChar(50)
+  product_id Int
+  product    inforbook @relation(fields: [product_id], references: [id]) 
+}
