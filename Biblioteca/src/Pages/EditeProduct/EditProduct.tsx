@@ -72,7 +72,7 @@ const EditBook= ()=>{
     //deletar item. Assim como na edicao para deletar e precisa enviar o id e a acao a ser feita. Porem nem um dado 
     //de edicao e enviado, ao invez disso e enviado id do produto no "information" para respeitar a ordem da api
     //e deletar o item 
-    const deleteitenincart= (infor: string, id: number | null)=>{
+    const deleteitemannounced= (infor: string, id: number | null)=>{
             axios.post(`http://localhost:3000/EditeProduct?id=${itensinfor.id}&whatchInfor=${infor}&information=${id}`).then((response)=>{
                 console.warn(response)
                 navigate('/')//assim que o item for deletado a inteface e modificada para a interface de 'Home'
@@ -109,7 +109,7 @@ const EditBook= ()=>{
                     <button onClick={()=> sendInformation('imgBook', objectProduct.imgBook)} className="w-max px-6 lg:px-8 py-[.2em] lg:py-[.4em] font-bold text-white rounded-3xl bg-[#00ccbe] hover:bg-[#00ccbe]/50 cursor-pointer">send</button>
                 </li>
             </ul>
-            <button onClick={()=> deleteitenincart('deleteItem', objectProduct.id)} className="w-max px-6 lg:px-8 py-[.2em] lg:py-[.4em] font-bold text-white rounded-3xl bg-[#00ccbe] hover:bg-[#00ccbe]/50 cursor-pointer">Exluir Item</button>
+            <button onClick={()=> deleteitemannounced('deleteItem', objectProduct.id)} className="w-max px-6 lg:px-8 py-[.2em] lg:py-[.4em] font-bold text-white rounded-3xl bg-[#00ccbe] hover:bg-[#00ccbe]/50 cursor-pointer">Exluir Item</button>
         </section>
     )
 }
