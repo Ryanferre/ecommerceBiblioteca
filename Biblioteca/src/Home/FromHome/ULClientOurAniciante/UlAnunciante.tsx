@@ -20,7 +20,7 @@ const UlAnuciante= ()=>{
     const {EmailUser}= useContext(DataCostum)
 
     useEffect(()=>{
-        axios.get(`http://localhost:3000/`).then((response)=>{
+        axios.get(`https://ecommercebiblioteca.onrender.com/`).then((response)=>{
             setItens(response.data[0])
         }).catch((err)=>{
             console.error(err)
@@ -31,7 +31,7 @@ const UlAnuciante= ()=>{
     const AddinCart= async (id: number)=>{
         // verifica se contem registro de usuario cadastrado. string vasia significa que nao tem usuario cadastrado
          if(EmailUser !== ''){// se tiver, faz uma requisicao dos produtos cadastrado com o email do usuario
-            axios.post(`http://localhost:3000/addincart`, {product_id: id, emailUser: EmailUser}).then((response)=>{
+            axios.post(`https://ecommercebiblioteca.onrender.com/addincart`, {product_id: id, emailUser: EmailUser}).then((response)=>{
             console.warn(response)
             }).catch((err)=>{
                 console.error(err)

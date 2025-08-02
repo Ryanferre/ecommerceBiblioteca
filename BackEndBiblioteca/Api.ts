@@ -138,8 +138,8 @@ ServeBifly.get("/", async (req: any, res)=>{
         }
     })
 
-const port=  Number(process.env.PORT) || 3000//3000(padrao para debug ou manutancao) ou utilize qualquer uma do servidor
+const Port=  Number(process.env.PORT) || 3000//3000(padrao para debug ou manutancao) ou utilize qualquer uma do servidor
 
-ServeBifly.listen({ port }, ()=>{
-    console.warn('rodando na porta: ' + port)
+ServeBifly.listen({ port: Port, host: '0.0.0.0' }, ()=>{
+    console.warn('rodando na porta: ' + Port)
 })

@@ -62,7 +62,7 @@ const EditBook= ()=>{
     //apos as informacoes serem atualizada e colocada em sua perspectiva chave valor no objeto, e feita uma comunicacao
     //como a api enviado ao edpoint o id do produto, a acao a ser feita e o dado a ser atualizado.
     const sendInformation= async (e: any, dataUpdate : any)=>{//o dataUpdate e o valor na chave passada como argumento e "e" e o tipo de acao a ser feita na api
-        axios.post(`http://localhost:3000/EditeProduct?id=${itensinfor.id}&whatchInfor=${e}&information=${dataUpdate}`).then((response)=>{
+        axios.post(`https://ecommercebiblioteca.onrender.com/EditeProduct?id=${itensinfor.id}&whatchInfor=${e}&information=${dataUpdate}`).then((response)=>{
             console.warn(response)
         }).catch((err)=>{
             console.error(err)
@@ -73,7 +73,7 @@ const EditBook= ()=>{
     //de edicao e enviado, ao invez disso e enviado id do produto no "information" para respeitar a ordem da api
     //e deletar o item 
     const deleteitemannounced= (infor: string, id: number | null)=>{
-            axios.post(`http://localhost:3000/EditeProduct?id=${itensinfor.id}&whatchInfor=${infor}&information=${id}`).then((response)=>{
+            axios.post(`https://ecommercebiblioteca.onrender.com/EditeProduct?id=${itensinfor.id}&whatchInfor=${infor}&information=${id}`).then((response)=>{
                 console.warn(response)
                 navigate('/')//assim que o item for deletado a inteface e modificada para a interface de 'Home'
             })

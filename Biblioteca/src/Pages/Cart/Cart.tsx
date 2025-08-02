@@ -47,7 +47,7 @@ const Cart= ()=>{
     useEffect(()=>{
          const requisitionServer= async ()=>{
             if(EmailUser != ''){//verifica se o meil existe se sim, e feito uma requisicao passando o email
-                axios.get(`http://localhost:3000/getcart?email=${EmailUser}`).then((response)=>{
+                axios.get(`https://ecommercebiblioteca.onrender.com/getcart?email=${EmailUser}`).then((response)=>{
                 setItens(response.data[0])
                 setInfor(response.data[1])
                 }).catch((err)=>{
@@ -79,9 +79,9 @@ const Cart= ()=>{
         for(let i=0; i < cartInforItens.length; i++){
             if(cartInforItens[i].product_id == id){
 
-                axios.post(`http://localhost:3000/deletitencart?idDelete=${cartInforItens[i].id}`).then((response)=>{
+                axios.post(`https://ecommercebiblioteca.onrender.com/deletitencart?idDelete=${cartInforItens[i].id}`).then((response)=>{
                     if(response){
-                        axios.get(`http://localhost:3000/getcart?email=${EmailUser}`).then((response)=>{
+                        axios.get(`https://ecommercebiblioteca.onrender.com/getcart?email=${EmailUser}`).then((response)=>{
                         setItens(response.data[0])})
                     }
                 }).catch((err)=>{

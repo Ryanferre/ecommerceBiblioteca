@@ -65,7 +65,7 @@ const Anuncio= ()=>{
     const BtnSend= async ()=>{
         objectProduct.emailUser= EmailUser
          try {
-            const res = await axios.post('http://localhost:3000/postProduto', objectProduct);
+            const res = await axios.post('https://ecommercebiblioteca.onrender.com/postProduto', objectProduct);
             if(res){
                 navigate('/')//sai da rota em direcao a interface "Home"
             }

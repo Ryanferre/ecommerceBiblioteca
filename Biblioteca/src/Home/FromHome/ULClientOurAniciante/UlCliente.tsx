@@ -22,7 +22,7 @@ const UlCliente= ()=>{
 
     useEffect(()=>{
         if(EmailUser != ''){
-            axios.get(`http://localhost:3000/?email=${EmailUser}`).then((response)=>{
+            axios.get(`https://ecommercebiblioteca.onrender.com/?email=${EmailUser}`).then((response)=>{
             setItens(response.data[0])//pega o primeiro array(que contem os produtos)
             }).catch((err)=>{
                 console.error(err)

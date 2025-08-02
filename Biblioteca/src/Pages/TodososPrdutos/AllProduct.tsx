@@ -21,7 +21,7 @@ const Allproducts= ()=>{
 
     //faz uma requisicao para o edpoint geral para pegar o produtos
     useEffect(()=>{
-        axios.get(`http://localhost:3000/`).then((response)=>{
+        axios.get(`https://ecommercebiblioteca.onrender.com/`).then((response)=>{
             setItens(response.data[0])
         }).catch((err)=>{
             console.error(err)
@@ -32,7 +32,7 @@ const Allproducts= ()=>{
     //adiciona ao carrinho se o usuario estiver cadastrado caso contrario e apresentado uma mensagem de "usuario nao cadastrado"
     const AddinCart= async (id: number)=>{
         if(EmailUser !== ''){
-            axios.post(`http://localhost:3000/addincart`, {product_id: id, emailUser: EmailUser}).then((response)=>{
+            axios.post(`https://ecommercebiblioteca.onrender.com/addincart`, {product_id: id, emailUser: EmailUser}).then((response)=>{
             console.warn(response)
             }).catch((err)=>{
                 console.error(err)
