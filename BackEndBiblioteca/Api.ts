@@ -4,9 +4,14 @@ import cors from '@fastify/cors'
 
 const prisma = new PrismaClient();
 const ServeBifly= Fastify({logger: true})//Servidor e status de execulcao
-await ServeBifly.register(cors, {
-  origin: "*"
-})
+const main = async()=>{
+  await ServeBifly.register(cors, {
+   origin: "*",
+   methods: ['GET', 'POST', 'PUT', 'DELETE']
+  })
+}
+
+main()
 
 //edipoint geral: esse edpoint e carregado na entrada do site para pegar os itens e exibir tanto para visitantes quanto para usuarios cadastrados
 //porem ela pode enviar os itens que o anunciante cadastrou no banco de dados pelo email, uma vez que cada item e cadastrado com o em email do usuario
