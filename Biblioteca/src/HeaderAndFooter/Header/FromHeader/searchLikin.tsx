@@ -39,9 +39,9 @@ const LikinForUser= ()=>{
     useEffect(()=>{
         if(isLoaded){
             setapress([
-              <li key="4" className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Meus Anuncios</li>,
-              <li key="5" className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Vendas</li>,
-              <li key="6" className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Anunciar</li>,
+              <Link to="/"><li key="4" className="font-bold  text-[#bbbbbb] hover:text-black cursor-pointer">Home</li></Link>,
+              <Link to="/Cart"><li key="5" className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Carrinho</li></Link>,
+              <li key="6" className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Abolt</li>,
               <details className="group z-20 absolute left-120" key="7"><summary className="appearance-none list-none font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Preferencia de conta</summary><ul><li onClick={Anuciante} className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Anuciante</li><li onClick={Cliente} className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Cliente</li></ul></details>
             ])
         }else{
@@ -54,7 +54,7 @@ const LikinForUser= ()=>{
     }, [Emailuser])
 
     useEffect(()=>{
-       if(isLoaded && user != null){
+       if(isLoaded && user?.primaryEmailAddress != null){
         setEmail(user.primaryEmailAddress.emailAddress)
        }else{
         console.log('error de login')
@@ -62,7 +62,6 @@ const LikinForUser= ()=>{
     }, [isLoaded])
 
     useEffect(()=>{
-      console.log(Emailuser)
       GetEmailUser(Emailuser)
     }, [Emailuser])
 

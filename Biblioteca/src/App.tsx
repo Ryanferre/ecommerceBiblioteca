@@ -3,6 +3,7 @@ import './App.css'
 import Header from './HeaderAndFooter/Header/Header'
 import { Outlet } from "react-router-dom"
 import DataCostum from './Settings/Custum'
+import Footer from './HeaderAndFooter/Header/Footer'
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
      <DataCostum.Provider value={{ ModalViewMenu, MoveModalMenu, EmailUser, GetEmailUser, wichUl, Getwich }}>
           <Header />
           <Outlet />
+          <Footer />
       </DataCostum.Provider>
   )
 }

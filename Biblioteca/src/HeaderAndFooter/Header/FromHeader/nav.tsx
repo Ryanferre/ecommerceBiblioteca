@@ -36,7 +36,7 @@ const NavFromHeader= ()=>{
                   Login
                 </button>
               </SignInButton>
-</SignedOut>
+              </SignedOut>
             </div>
             <button className="flex lg:hidden z-30 cursor-pointer" onClick={ModalMenuVisibleOurNone}>
               <img className="w-[2em]" src='https://i.postimg.cc/25nWkh0S/menu-aberto.png'/>

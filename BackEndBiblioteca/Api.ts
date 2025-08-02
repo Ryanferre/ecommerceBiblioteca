@@ -3,34 +3,34 @@ import { PrismaClient } from '@prisma/client';
 import cors from '@fastify/cors'
 
 const prisma = new PrismaClient();
-const ServeAtivos= Fastify({logger: true})//Servidor e status de execulcao
-await ServeAtivos.register(cors, {
+const ServeBifly= Fastify({logger: true})//Servidor e status de execulcao
+await ServeBifly.register(cors, {
   origin: "*"
 })
 
 //edipoint geral: esse edpoint e carregado na entrada do site para pegar os itens e exibir tanto para visitantes quanto para usuarios cadastrados
 //porem ela pode enviar os itens que o anunciante cadastrou no banco de dados pelo email, uma vez que cada item e cadastrado com o em email do usuario
-ServeAtivos.get("/", async (req: any, res)=>{ 
+ServeBifly.get("/", async (req: any, res)=>{ 
     
     try {
         const {email}= req.query//captura o email do usuario
 
-    if(!email){// se na requsicao nao vinher o email, significa que e para enviar todos os itens e que o usuario nao esta altenticado
- 
-            const dataUser= await prisma.inforbook.findMany()
-            res.send([dataUser])
-    }else{// se vinher um email significa que e para pegar os itens referente a esse email
-            const dataUser= await prisma.inforbook.findMany({where: { emailUser: String(email) }})
-            res.send([dataUser])
-    }
+        if(!email){// se na requisicao nao vinher o email, significa que e para enviar todos os itens e que o usuario nao esta altenticado
+    
+                const dataUser= await prisma.inforbook.findMany()
+                res.send([dataUser])
+        }else{// se vinher um email significa que e para pegar os itens referente a esse email
+                const dataUser= await prisma.inforbook.findMany({where: { emailUser: String(email) }})
+                res.send([dataUser])
+        }
     } catch (error) {
         res.send(error)
     }
 
     })
 
-    //edpoint de cadastro: Esse edpoint serve para o usuario anunciar um item recebe todos os itens referente ao produto e cadastra ao banco de dados
-    ServeAtivos.post("/postProduto", async (req: any, res)=>{
+    //edpoint de cadastro: Esse edpoint serve para o usuario anunciar um item. recebe todos os itens referente ao produto e cadastra ao banco de dados
+    ServeBifly.post("/postProduto", async (req: any, res)=>{
         const {emailUser, nameAutorBook, titleBook, priceBook, descriptionBook, imgBook}= req.body as { emailUser: string, nameAutorBook: string, titleBook: string, priceBook: number, descriptionBook: string, imgBook: string}
 
         try{
@@ -42,7 +42,7 @@ ServeAtivos.get("/", async (req: any, res)=>{
     })
 
     //edpoit de edicao de produto ou delecao: esse edpoint serve para o usuario editar o produto que foi anunciado como preco, titulo, autor, ou imagem. Ou deletar o produto
-    ServeAtivos.post("/EditeProduct", async (req, res)=>{
+    ServeBifly.post("/EditeProduct", async (req, res)=>{
         try {
 
             //para que a edicao seja feita e preciso de tres dado do usuario: o id referente ao produto, qual acao a ser feita e o novo dado do produto
@@ -85,7 +85,7 @@ ServeAtivos.get("/", async (req: any, res)=>{
 
     //edpoint para adicionar itens ao carrinho: esse edpoint serve para adicionar itens ao carrinho. ele recebe o email do usuario que quer adicionar o item e o id do item
     //ela uni o usuario aos items que ele deseja atravez de chave estrangeira
-    ServeAtivos.post('/addincart', async (req, res)=>{
+    ServeBifly.post('/addincart', async (req, res)=>{
           const {product_id, emailUser}= req.body as { product_id: number, emailUser: string}//recebe o id do produto e o email do usuario para identificar a tabela(carrinho) do usuario que sera criada
           //ATENCAO: Cada item adicionado sera uma tabela criada
 
@@ -98,7 +98,7 @@ ServeAtivos.get("/", async (req: any, res)=>{
     })
 
     //pega as itens que o usuario quer comprar
-    ServeAtivos.get('/getcart', async (req, res)=>{
+    ServeBifly.get('/getcart', async (req, res)=>{
         const {email}: any= req.query//pega o email na requisicao
         try {
 
@@ -125,7 +125,7 @@ ServeAtivos.get("/", async (req: any, res)=>{
     //endponit para deletar produto anunciado: Esse edpoint deleta o item anunciado pelo usuario
     //como os itens a serem deletados sao os mesmo retornado no edpoint de chamada geral e so os usuario altenticado e com email cadastrado em cada tabela
     //nao e necessario fazer verificacao de email
-    ServeAtivos.post('/deletitencart', async(req, res)=>{
+    ServeBifly.post('/deletitencart', async(req, res)=>{
         const {idDelete}: any= req.query// pega o id do item(ele vem como string)
 
         const toNumberId= Number(idDelete)// transforma a string em number
@@ -140,6 +140,6 @@ ServeAtivos.get("/", async (req: any, res)=>{
 
 const port=  Number(process.env.PORT) || 3000//3000(padrao para debug ou manutancao) ou utilize qualquer uma do servidor
 
-ServeAtivos.listen({ port }, ()=>{
+ServeBifly.listen({ port }, ()=>{
     console.warn('rodando na porta: ' + port)
 })

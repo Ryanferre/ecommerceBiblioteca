@@ -34,7 +34,7 @@ const UlCliente= ()=>{
     
     return(
         <ul className={`grid grid-cols-2 lg:flex lg:flex-row overflow-scroll w-full py-10 px-15 gap-3`}>
-            {itens.slice(0, 4).map((itensinfor)=>(
+            {itens.map((itensinfor)=>(
                 <li className="flex flex-col gap-3 w-40" key={itensinfor.id}>
                     <img className="w-25 lg:w-40 mx-auto lg:mx-0" src={itensinfor.imgBook}/>
                     <h2>{itensinfor.nameAutorBook}</h2>
