@@ -24,11 +24,11 @@ const NavFromHeader= ()=>{
                 <UserButton/>
               </SignedIn>
               <SignedOut>
-              <SignInButton>
+               <SignInButton>
                 <button className="px-5 py-[.4em] font-bold text-[#bbbbbb] hover:text-white rounded-3xl hover:bg-[#00ccbe]/50 cursor-pointer">
                   Login
                 </button>
-              </SignInButton>
+               </SignInButton>
               </SignedOut>
               <SignedOut>
               <SignInButton>

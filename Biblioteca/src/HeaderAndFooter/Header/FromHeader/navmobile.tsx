@@ -1,4 +1,4 @@
-import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react'
+import { SignedIn, SignedOut, UserButton, SignInButton } from '@clerk/clerk-react'
 import DataCostum from '../../../Settings/Custum'
 import { useContext } from 'react'
 import LikinForUser from './searchLikin'
@@ -16,10 +16,18 @@ const NavFromHeaderMobile= ()=>{
                 <UserButton/>
               </SignedIn>
               <SignedOut>
-                <button className="px-2 py-[.4em] font-bold text-[#bbbbbb] rounded-2xl hover:text-[#00ccbe] cursor-pointer">Sing In</button>
+               <SignInButton>
+                <button className="px-5 py-[.4em] font-bold text-[#bbbbbb] hover:text-[#00ccbe] rounded-3xl cursor-pointer">
+                  Login
+                </button>
+               </SignInButton>
               </SignedOut>
               <SignedOut>
-                <button className="px-2 py-[.4em] font-bold text-[#bbbbbb] rounded-2xl hover:text-[#00ccbe] cursor-pointer">Login</button>
+              <SignInButton>
+                <button className="px-5 py-[.4em] font-bold text-[#bbbbbb] hover:text-[#00ccbe] rounded-3xl cursor-pointer">
+                  Login
+                </button>
+              </SignInButton>
               </SignedOut>
             </div>
         </nav>
