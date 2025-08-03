@@ -8,6 +8,7 @@ import Anuncio from './Pages/ProductisClient/Products.tsx';
 import EditBook from './Pages/EditeProduct/EditProduct.tsx';
 import Cart from './Pages/Cart/Cart.tsx';
 import Allproducts from './Pages/TodososPrdutos/AllProduct.tsx';
+import Apress from './Pages/ApressProduct/Apress.tsx';
 
 const apiKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
@@ -34,6 +35,10 @@ const rounter= createBrowserRouter([
     {
       path: '/Allproducts',
       element: <Allproducts />
+    },
+    {
+      path: '/Apress',
+      element: <Apress />
     }
     ]
   }

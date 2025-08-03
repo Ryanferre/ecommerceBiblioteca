@@ -1,6 +1,7 @@
 import NavFromHeader from "./FromHeader/nav"
 import NavFromHeaderMobile from "./FromHeader/navmobile"
 import { Link } from "react-router-dom"
+import Mensage from "./FromHeader/Mensage"
 
 const Header= ()=>{
     return(
@@ -8,6 +9,7 @@ const Header= ()=>{
             <Link to="/"><h1 className="text-3xl font-bold">Bifly</h1></Link>
             <NavFromHeader />
             <NavFromHeaderMobile />
+            <Mensage />
         </section>
     )
 }

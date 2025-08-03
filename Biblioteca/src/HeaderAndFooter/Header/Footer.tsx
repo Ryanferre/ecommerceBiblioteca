@@ -31,7 +31,7 @@ const Footer= ()=>{
             <div>
                 <p className="text-[1em] text-white font-semibold"><Link to="/">Home</Link></p>
                 <p className="text-[1em] text-white font-semibold">Contact</p>
-                <p className="text-[1em] text-white font-semibold">Abolt</p>
+                <p className="text-[1em] text-white font-semibold">About us</p>
             </div>
         </section>
     )

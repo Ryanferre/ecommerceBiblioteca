@@ -46,7 +46,7 @@ const Cart= ()=>{
 
     useEffect(()=>{
          const requisitionServer= async ()=>{
-            if(EmailUser != ''){//verifica se o meil existe se sim, e feito uma requisicao passando o email
+            if(EmailUser != ''){//verifica se o email existe se sim, e feito uma requisicao passando o email
                 axios.get(`https://ecommercebiblioteca.onrender.com/getcart?email=${EmailUser}`).then((response)=>{
                 setItens(response.data[0])
                 setInfor(response.data[1])
@@ -136,26 +136,26 @@ const Cart= ()=>{
     }, [ResApi.cep])
     
     return(
-        <section className="flex flex-row px-10 py-10">
-            <ul className={`grid grid-cols-2 lg:flex lg:flex-row overflow-scroll w-full py-10 px-15 gap-3`}>
+        <section className="flex flex-col lg:flex-row px-5 lg:px-10 py-10">
+            <ul className={`grid grid-cols-2 lg:flex lg:flex-row overflow-scroll w-full py-10 px-0 lg:px-15 gap-3`}>
             {itensUser !== undefined && itensUser.length > 0 ? itensUser.map((itensinfor)=>(
                 <li className="flex flex-col gap-3 w-40" key={itensinfor.id}>
                     <img className="w-25 lg:w-40 mx-auto lg:mx-0" src={itensinfor.imgBook}/>
-                    <h2>{itensinfor.nameAutorBook}</h2>
+                    <h2 className="text-center">{itensinfor.nameAutorBook}</h2>
                     <div className="flex flex-col gap-2">
-                        <h2 className="text-[.7em] lg:text-[.9em] font-bold">{itensinfor.titleBook}</h2>
-                        <p className="text-[1em] text-[#bbbbbb] font-semibold">R${itensinfor.priceBook}</p>
+                        <h2 className="text-[.7em] lg:text-[.9em] text-center font-bold">{itensinfor.titleBook}</h2>
+                        <p className="text-[1em] text-[#bbbbbb] text-center font-semibold">R${itensinfor.priceBook}</p>
                     </div>
-                    <button onClick={()=> deleteitenincart(itensinfor.id)} className="w-max px-6 lg:px-8 py-[.2em] lg:py-[.4em] font-bold text-white rounded-3xl bg-[#00ccbe] hover:bg-[#00ccbe]/50 cursor-pointer">Excluir</button>
+                    <button onClick={()=> deleteitenincart(itensinfor.id)} className="w-max mx-auto px-6 lg:px-8 py-[.2em] lg:py-[.4em] font-bold text-white rounded-3xl bg-[#00ccbe] hover:bg-[#00ccbe]/50 cursor-pointer">Delete</button>
                 </li>
-            )) : <p className="text-[1em] text-[#bbbbbb] font-semibold mx-auto my-auto">Carrinho vasio</p>}
+            )) : <p className="text-[1em] text-[#bbbbbb] font-semibold mx-auto my-auto">Empty cart</p>}
             </ul>
-            <div className="w-max px-10 py-4 h-max flex flex-col items-center justify-center m-auto gap-9 rounded-[15px]">
-           <div className="flex flex-row justify-between rounded-[5px] w-50">
+         <div className="w-max px-5 lg:px-10 py-4 h-max flex flex-row lg:flex-col lg:items-center justify-center m-auto gap-4 lg:gap-9 rounded-[15px]">
+           <div className="flex flex-row justify-between rounded-[5px] w-34 lg:w-50">
             <ul>
                 <li><p className="text-[1em] text-[#bbbbbb] font-semibold">Total</p></li>
                 <li><p className="text-[1em] text-[#bbbbbb] font-semibold">Quant</p></li>
-                <li><p className="text-[1em] text-[#bbbbbb] font-semibold">Frete</p></li>
+                <li><p className="text-[1em] text-[#bbbbbb] font-semibold">Freight</p></li>
             </ul>
             <ul>
                 <li><p className="text-[1em] text-[#bbbbbb] font-semibold">R${Price}</p></li>
@@ -163,13 +163,13 @@ const Cart= ()=>{
                 <li><p className="text-[1em] text-[#bbbbbb] font-semibold">{Pricefrete}</p></li>
             </ul>
            </div>
-           <label className="flex flex-row gap-5">
-            <p className="text-[1em] text-[#bbbbbb] font-semibold">Cep</p>
-            <input className="border h-8 rounded-[5px] border-[#bbbbbb] w-38 pl-[6px] outline-none" type="text" onChange={validCep} />
-           </label>
            <div className="flex flex-col items-center gap-2">
-              <h1 className="text-[20px] text-center w-full h-max text-[#00ccbe] font-bold">Pagamento via pix</h1>
-              <img src={Qrcode} />
+            <label className="flex flex-row gap-5">
+             <p className="text-[1em] text-[#bbbbbb] font-semibold">Cep</p>
+             <input className="border h-8 rounded-[5px] border-[#bbbbbb] w-38 pl-[6px] outline-none" type="text" onChange={validCep} />
+            </label>
+            <h1 className="text-[20px] text-center w-full h-max text-[#00ccbe] font-bold">Payment via pix</h1>
+            <img src={Qrcode} />
            </div>
          </div>
         </section>

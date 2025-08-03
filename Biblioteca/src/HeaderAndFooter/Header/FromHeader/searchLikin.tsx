@@ -19,19 +19,19 @@ const LikinForUser= ()=>{
     const Cliente= ()=>{
             setapress([
               <Link to="/"><li key="4" className="font-bold  text-[#bbbbbb] hover:text-black cursor-pointer">Home</li></Link>,
-              <Link to="/Cart"><li key="5" className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Carrinho</li></Link>,
-              <li key="6" className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Abolt</li>,
-              <details className="group z-20 absolute left-120" key="7"><summary className="appearance-none list-none font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Preferencia de conta</summary><ul><li onClick={Anuciante} className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Anuciante</li><li onClick={Cliente} className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Cliente</li></ul></details>
+              <Link to="/Cart"><li key="5" className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Cart</li></Link>,
+              <li key="6" className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">About</li>,
+              <details className="group z-20 lg:absolute lg:left-120" key="7"><summary className="appearance-none list-none font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Account preference</summary><ul><li onClick={Anuciante} className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Advertiser</li><li onClick={Cliente} className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Client</li></ul></details>
             ])
             Getwich(false)
     }
 
     const Anuciante= ()=>{
             setapress([
-              <li key="4" className="font-bold  text-[#bbbbbb] hover:text-black cursor-pointer">Meus Anuncios</li>,
-              <li key="5" className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Vendas</li>,
-              <Link to="/Anuncio"><li key="6" className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Anunciar</li></Link>,
-              <details className="group z-20 absolute left-120" key="7"><summary className="appearance-none list-none font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Preferencia de conta</summary><ul><li onClick={Anuciante} className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Anuciante</li><li onClick={Cliente} className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Cliente</li></ul></details>
+              <li key="4" className="font-bold  text-[#bbbbbb] hover:text-black cursor-pointer">My Ads</li>,
+              <li key="5" className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Sales</li>,
+              <Link to="/Anuncio"><li key="6" className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Announce</li></Link>,
+              <details className="group z-20 lg:absolute lg:left-120" key="7"><summary className="appearance-none list-none font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Account preference</summary><ul><li onClick={Anuciante} className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Advertiser</li><li onClick={Cliente} className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Client</li></ul></details>
             ])
             Getwich(true)
     }
@@ -40,9 +40,9 @@ const LikinForUser= ()=>{
         if(isLoaded){
             setapress([
               <Link to="/"><li key="4" className="font-bold  text-[#bbbbbb] hover:text-black cursor-pointer">Home</li></Link>,
-              <Link to="/Cart"><li key="5" className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Carrinho</li></Link>,
-              <li key="6" className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Abolt</li>,
-              <details className="group z-20 absolute left-120" key="7"><summary className="appearance-none list-none font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Preferencia de conta</summary><ul><li onClick={Anuciante} className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Anuciante</li><li onClick={Cliente} className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Cliente</li></ul></details>
+              <Link to="/Cart"><li key="5" className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Cart</li></Link>,
+              <li key="6" className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">About</li>,
+              <details className="group z-20 lg:absolute lg:left-120" key="7"><summary className="appearance-none list-none font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Account preference</summary><ul><li onClick={Anuciante} className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Advertiser</li><li onClick={Cliente} className="font-bold text-[#bbbbbb] hover:text-black cursor-pointer">Client</li></ul></details>
             ])
         }else{
           setapress([

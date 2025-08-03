@@ -5,7 +5,9 @@ interface TypeCostumData {
     ModalViewMenu: string,//modal menu mobile
     EmailUser: string | null,//armazenamento do email do usuario(esse email foi retirado do clerck)
     wichUl: boolean | null,
+    MensageInfor: ReactNode, //armazena a mensagem que apresentando falha (ou sucesso de login) e tentativa de cadastro de usuario sem altenticação
     Getwich: (e: boolean | null) => void,
+    GetMensageInfor: (value: ReactNode) => void,
     MoveModalMenu: (e: string) => void//funcao para manipular avibilidade
     GetEmailUser: (e: string)=> void//funcao para pegar o email
 }
@@ -14,7 +16,9 @@ export const DataCostum = createContext<TypeCostumData>({
     ModalViewMenu: '-top-90',
     EmailUser: '',
     wichUl: null,
+    MensageInfor: '', //armazena a mensagem que apresentando falha (ou sucesso de login) e tentativa de cadastro de usuario sem altenticação
     Getwich: () => {},
+    GetMensageInfor: () => {},
     MoveModalMenu: ()=> {},
     GetEmailUser: ()=>{}
 })
@@ -24,6 +28,7 @@ export const universalCostumData = ({ children }: { children: ReactNode })=>{
     const [ModalViewMenu, setvisiblemenu]= useState<string>('-top-90')
     const [EmailUser, setEmail]= useState<string | null>('')
     const [wichUl, setwich]= useState<boolean | null>(false)
+    const [MensageInfor, Getmensage]= useState<ReactNode>(null)
 
     const MoveModalMenu= (e: string)=>{
       setvisiblemenu(e)
@@ -37,9 +42,13 @@ export const universalCostumData = ({ children }: { children: ReactNode })=>{
       setwich(e)
     }
 
+    const GetMensageInfor= (e: ReactNode | null)=>{
+      Getmensage(e)
+    }
+
 
     return (
-    <DataCostum.Provider value={{ ModalViewMenu, MoveModalMenu, EmailUser, GetEmailUser, wichUl, Getwich}}>
+    <DataCostum.Provider value={{ ModalViewMenu, MoveModalMenu, EmailUser, GetEmailUser, wichUl, Getwich, MensageInfor, GetMensageInfor}}>
       {children}
     </DataCostum.Provider>
   );
