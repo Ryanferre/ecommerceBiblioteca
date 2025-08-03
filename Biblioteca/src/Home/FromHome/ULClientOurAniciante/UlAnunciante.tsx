@@ -17,7 +17,8 @@ export type itensJson = {
 
 //esse componente e apresentado somente ao usuarios cadastrado e que contem anuncios. Ele apresenta os produtos anunciado
 const UlAnuciante= ()=>{
-    const [itens, setItens] =useState <itensJson []>([])//guarda o array com os objetos
+    //guarda o array com os objetos
+    const [itens, setItens] =useState <itensJson []>([])
     const {EmailUser}= useContext(DataCostum)
     const [isLoading, setLoading]= useState(false)
 
