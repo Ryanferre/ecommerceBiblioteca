@@ -115,7 +115,7 @@ const Anuncio= ()=>{
         <section className="shadow-2xl rounded-2xl w-max mx-auto my-5 py-5 px-10 flex flex-col gap-5">
             {isLoading != true ?
             <>  
-                <ul className="w-100">
+                <ul className="w-70 lg:w-100">
                     <li>
                         <p className="font-medium text-[#bbbbbb]">Author's name</p>
                         <input className="outline-none w-full border-b-1 border-[#bbbbbb]" onChange={(e)=> validNameAutor(e)} type="text"/>
