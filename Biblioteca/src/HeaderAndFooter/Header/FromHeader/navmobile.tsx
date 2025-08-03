@@ -18,7 +18,7 @@ const NavFromHeaderMobile= ()=>{
               <SignedOut>
                <SignInButton>
                 <button className="px-5 py-[.4em] font-bold text-[#bbbbbb] hover:text-[#00ccbe] rounded-3xl cursor-pointer">
-                  Login
+                  Sing In
                 </button>
                </SignInButton>
               </SignedOut>
