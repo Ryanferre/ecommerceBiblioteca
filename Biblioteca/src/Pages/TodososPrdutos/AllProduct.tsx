@@ -18,7 +18,7 @@ type itensJson = {
 //interface que vai apresentar todos os produtos ao cliente ou visitante
 const Allproducts= ()=>{
     const [itens, setItens] =useState <itensJson []>([])//armazena os produtos recebido na requisicao
-    const {EmailUser}= useContext(DataCostum)//pega o email do usuario
+    const {EmailUser, GetMensageInfor}= useContext(DataCostum)//pega o email do usuario
     const [isLoading, setLoading]= useState(false)
 
     //faz uma requisicao para o edpoint geral para pegar o produtos
@@ -28,6 +28,7 @@ const Allproducts= ()=>{
             if(response){
                 setLoading(false)
                 setItens(response.data[0])
+                GetMensageInfor([<p className="text-[#bbbbbb]">Item added to cart!</p>])
             }
         }).catch((err)=>{
             console.error(err)
@@ -44,7 +45,7 @@ const Allproducts= ()=>{
                 console.error(err)
             })
         }else{
-            alert('Usuario nao cadastrado!')
+            GetMensageInfor([<p className="text-[#bbbbbb]">User not registered!</p>])
         }
     }
     

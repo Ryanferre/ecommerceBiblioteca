@@ -66,9 +66,7 @@ const Cart= ()=>{
     useEffect(()=>{
         if(itensUser){
             const SomPrice= itensUser.reduce((Ac, atual)=> Ac + atual.priceBook, 0)
-
             setPrice(SomPrice)
-            console.log(SomPrice)
         }
     }, [itensUser])
 
