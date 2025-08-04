@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState, useContext } from "react"
 import DataCostum from "../../Settings/Custum"
+import { Link } from "react-router-dom"
 
 
 //tipagem dos objetos que representam os produtos
@@ -17,12 +18,17 @@ type itensJson = {
 //interface que vai apresentar todos os produtos ao cliente ou visitante
 const Allproducts= ()=>{
     const [itens, setItens] =useState <itensJson []>([])//armazena os produtos recebido na requisicao
-    const {EmailUser}= useContext(DataCostum)//pega o email do usuario 
+    const {EmailUser}= useContext(DataCostum)//pega o email do usuario
+    const [isLoading, setLoading]= useState(false)
 
     //faz uma requisicao para o edpoint geral para pegar o produtos
     useEffect(()=>{
-        axios.get(`https://ecommercebiblioteca.onrender.com/`).then((response)=>{
-            setItens(response.data[0])
+        setLoading(true)
+        axios.get(`ht://ecommercebiblioteca.onrender.com/`).then((response)=>{
+            if(response){
+                setLoading(false)
+                setItens(response.data[0])
+            }
         }).catch((err)=>{
             console.error(err)
         })
@@ -44,7 +50,9 @@ const Allproducts= ()=>{
     
     return(
         <ul className={`grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-3 items-center overflow-y-auto px-10 lg:px-20 py-10`}>
-            {itens.map((itensinfor)=>(
+            {isLoading != true ? itens.map((itensinfor)=>(
+                <>
+                <Link to="/apress" state={{itensJson: itensinfor}}>
                 <li className="flex flex-col gap-3 w-40" key={itensinfor.id}>
                     <img className="w-25 lg:w-40 mx-auto lg:mx-0" src={itensinfor.imgBook}/>
                     <h2 className="text-center text-[.8em] lg:text-[.9em] lg:text-start">{itensinfor.titleBook}</h2>
@@ -54,7 +62,12 @@ const Allproducts= ()=>{
                     </div>
                     <button onClick={()=> AddinCart(itensinfor.id)} className="w-max mx-auto lg:mx-0 px-6 lg:px-8 py-[.2em] lg:py-[.4em] font-bold text-white rounded-3xl bg-[#00ccbe] hover:bg-[#00ccbe]/50 cursor-pointer">ADD cart</button>
                 </li>
-            ))}
+                </Link>
+                </>
+            )) : 
+            <div className="w-full ml-20 flex flex-col justify-center items-center h-90">
+             <img className="w-20" src="https://i.postimg.cc/kMsYQcRQ/geografia-1.gif"/>
+            </div>}
         </ul>
     )
 }
