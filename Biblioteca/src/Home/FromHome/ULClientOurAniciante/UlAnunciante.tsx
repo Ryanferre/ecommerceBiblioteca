@@ -46,7 +46,7 @@ const UlAnuciante= ()=>{
                 console.error(err)
             })
         }else{
-            alert('Usuario nao cadastrado!')
+            GetMensageInfor([<p className="text-[#bbbbbb]">User not registered!</p>])
         }
     }
     
