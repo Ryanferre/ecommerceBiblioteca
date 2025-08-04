@@ -21,14 +21,13 @@ const Allproducts= ()=>{
     const {EmailUser, GetMensageInfor}= useContext(DataCostum)//pega o email do usuario
     const [isLoading, setLoading]= useState(false)
 
-    //faz uma requisicao para o edpoint geral para pegar o produtos
+    //faz uma requisicao para o edpoint geral para pegar os produtos
     useEffect(()=>{
         setLoading(true)
         axios.get(`https://ecommercebiblioteca.onrender.com/`).then((response)=>{
             if(response){
                 setLoading(false)
                 setItens(response.data[0])
-                GetMensageInfor([<p className="text-[#bbbbbb]">Item added to cart!</p>])
             }
         }).catch((err)=>{
             console.error(err)
@@ -40,7 +39,7 @@ const Allproducts= ()=>{
     const AddinCart= async (id: number)=>{
         if(EmailUser !== ''){
             axios.post(`https://ecommercebiblioteca.onrender.com/addincart`, {product_id: id, emailUser: EmailUser}).then((response)=>{
-            console.warn(response)
+            GetMensageInfor([<p className="text-[#bbbbbb]">Item added to cart!</p>])
             }).catch((err)=>{
                 console.error(err)
             })
