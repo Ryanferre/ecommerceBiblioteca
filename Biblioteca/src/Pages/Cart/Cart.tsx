@@ -74,22 +74,19 @@ const Cart= ()=>{
 
     //deletar item
     const deleteitenincart= (id: number)=>{
-
-        //esse for faz uma comparacao entre o id do item que deseja deletar e o 
-        for(let i=0; i < cartInforItens.length; i++){
-            if(cartInforItens[i].product_id == id){
-
-                axios.post(`https://ecommercebiblioteca.onrender.com/deletitencart?idDelete=${cartInforItens[i].id}`).then((response)=>{
+        const itemdeleted = cartInforItens.find(item => item.product_id === id)
+            if(itemdeleted){
+                axios.post(`https://ecommercebiblioteca.onrender.com/deletitencart?idDelete=${itemdeleted.id}`).then((response)=>{
                     if(response){
                         axios.get(`https://ecommercebiblioteca.onrender.com/getcart?email=${EmailUser}`).then((response)=>{
-                        setItens(response.data[0])})
+                        setItens(response.data[0])
+                        setInfor(response.data[1])
+                    })
                     }
                 }).catch((err)=>{
                     console.error(err)
                 })
-
             }
-        }
     
     }
 

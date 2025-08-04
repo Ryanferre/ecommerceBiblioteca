@@ -119,7 +119,7 @@ ServeBifly.get("/", async (req: any, res)=>{
                 arrwithitesn.push(getitensofuser)// a cada item encontrado e passado para o array que armazena os items
             }
 
-            if(arrwithitesn.length > 0){// verifica se o array esta vasio, se nao ele envia os dois arrays um com os items do carrinho e o outro com as tabelas do corrinho para o front-end como reposta
+            if(arrwithitesn.length > 0){// verifica se o array esta vasio, se nao ele envia os dois arrays: um com os items do carrinho e o outro com as tabelas do corrinho para o front-end como reposta
                 res.send([arrwithitesn, dataUser])//
             }
         } catch (error) {

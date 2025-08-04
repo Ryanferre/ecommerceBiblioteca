@@ -55,19 +55,17 @@ const UlAnuciante= ()=>{
             <h3 className="text-[.7em] lg:text-[1.5em] font-bold">Highlight of the week</h3>
             <ul className={`grid grid-cols-2 lg:flex lg:flex-row overflow-scroll justify-between w-full py-10 px-5 lg:px-0 gap-3 lg:gap-0`}>
                 {isLoading != true ? itens.slice(0, 4).map((itensinfor)=>(
-                    <>
-                    <Link to="/apress" state={{itensJson: itensinfor}}>
                     <li className="flex flex-col w-40 lg:w-50 gap-3" key={itensinfor.id}>
+                        <Link to="/apress" state={{itensJson: itensinfor}}>
                         <img className="w-25 lg:w-40 mx-auto lg:mx-0" src={itensinfor.imgBook}/>
                         <h2 className="text-center lg:text-start">{itensinfor.nameAutorBook}</h2>
                         <div className="flex flex-col gap-2">
                             <h2 className="text-[.7em] lg:text-[.9em] text-center lg:text-start font-bold">{itensinfor.titleBook}</h2>
                             <p className="text-[1em] text-[#bbbbbb] text-center lg:text-start font-semibold">${itensinfor.priceBook}</p>
                         </div>
+                        </Link>
                         <button onClick={()=> AddinCart(itensinfor.id)} className="w-max text-[.8em] lg:text-[1em] mx-auto lg:mx-0 px-3 lg:px-8 py-[.2em] lg:py-[.4em] font-bold text-white rounded-3xl bg-[#00ccbe] hover:bg-[#00ccbe]/50 cursor-pointer">ADD cart</button>
                     </li>
-                    </Link>
-                    </>
                 )) : 
                 <div className="w-full ml-20 flex flex-col justify-center items-center h-80">
                  <img className="w-20" src="https://i.postimg.cc/kMsYQcRQ/geografia-1.gif"/>
