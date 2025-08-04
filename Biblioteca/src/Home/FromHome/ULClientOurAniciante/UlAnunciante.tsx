@@ -52,7 +52,7 @@ const UlAnuciante= ()=>{
     
     return(
         <section className="px-5 lg:px-20 py-5">
-            <h3 className="text-[.7em] lg:text-[1.5em] font-bold">Highlight of the week</h3>
+            <h3 className="text-[1em] lg:text-[1.5em] font-bold">Highlight of the week</h3>
             <ul className={`grid grid-cols-2 lg:flex lg:flex-row overflow-scroll justify-between w-full py-10 px-5 lg:px-0 gap-3 lg:gap-0`}>
                 {isLoading != true ? itens.slice(0, 4).map((itensinfor)=>(
                     <li className="flex flex-col w-40 lg:w-50 gap-3" key={itensinfor.id}>
@@ -72,7 +72,7 @@ const UlAnuciante= ()=>{
                 </div>}
             </ul>
             <section className="flex flex-col gap-3">
-                <h4 className="text-[.7em] lg:text-[1.5em] font-bold">Renowned authors</h4>
+                <h4 className="text-[1em] lg:text-[1.5em] font-bold">Renowned authors</h4>
                 <ul className="flex flex-row overflow-x-scroll gap-5 lg:gap-15">
                     <li>
                         <div className="w-40 lg:w-70">
