@@ -58,9 +58,9 @@ const UlAnuciante= ()=>{
                     <li className="flex flex-col w-40 lg:w-50 gap-3" key={itensinfor.id}>
                         <Link to="/apress" state={{itensJson: itensinfor}}>
                         <img className="w-25 lg:w-40 mx-auto lg:mx-0" src={itensinfor.imgBook}/>
-                        <h2 className="text-center lg:text-start">{itensinfor.nameAutorBook}</h2>
+                        <h2 className="text-center lg:text-start">{itensinfor.titleBook}</h2>
                         <div className="flex flex-col gap-2">
-                            <h2 className="text-[.7em] lg:text-[.9em] text-center lg:text-start font-bold">{itensinfor.titleBook}</h2>
+                            <h2 className="text-[.7em] lg:text-[.9em] text-center lg:text-start font-bold">{itensinfor.nameAutorBook}</h2>
                             <p className="text-[1em] text-[#bbbbbb] text-center lg:text-start font-semibold">${itensinfor.priceBook}</p>
                         </div>
                         </Link>
