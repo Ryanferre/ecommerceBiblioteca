@@ -24,7 +24,7 @@ const Allproducts= ()=>{
     //faz uma requisicao para o edpoint geral para pegar o produtos
     useEffect(()=>{
         setLoading(true)
-        axios.get(`ht://ecommercebiblioteca.onrender.com/`).then((response)=>{
+        axios.get(`https://ecommercebiblioteca.onrender.com/`).then((response)=>{
             if(response){
                 setLoading(false)
                 setItens(response.data[0])
