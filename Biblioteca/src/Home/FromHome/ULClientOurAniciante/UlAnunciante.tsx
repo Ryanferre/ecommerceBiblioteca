@@ -19,7 +19,7 @@ export type itensJson = {
 const UlAnuciante= ()=>{
     //guarda o array com os objetos
     const [itens, setItens] =useState <itensJson []>([])
-    const {EmailUser}= useContext(DataCostum)
+    const {EmailUser, GetMensageInfor}= useContext(DataCostum)
     const [isLoading, setLoading]= useState(false)
 
     useEffect(()=>{
@@ -41,7 +41,7 @@ const UlAnuciante= ()=>{
         // verifica se contem registro de usuario cadastrado. string vasia significa que nao tem usuario cadastrado
          if(EmailUser !== ''){// se tiver, faz uma requisicao dos produtos cadastrado com o email do usuario
             axios.post(`https://ecommercebiblioteca.onrender.com/addincart`, {product_id: id, emailUser: EmailUser}).then((response)=>{
-            console.warn(response)
+            GetMensageInfor([<p className="text-[#bbbbbb]">Item added to cart!</p>])
             }).catch((err)=>{
                 console.error(err)
             })
