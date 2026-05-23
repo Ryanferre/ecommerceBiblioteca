@@ -132,7 +132,7 @@ const Cart= ()=>{
     
     return(
         <section className="flex flex-col lg:flex-row px-5 lg:px-10 py-10">
-            <ul className={`grid grid-cols-2 lg:flex lg:flex-row overflow-scroll w-full py-10 px-0 lg:px-15 gap-3`}>
+            <ul className={`grid grid-cols-2 lg:flex lg:flex-row overflow-scroll w-full h-[45.8vh] py-10 px-0 lg:px-15 gap-3`}>
             {itensUser !== undefined && itensUser.length > 0 ? itensUser.map((itensinfor)=>(
                 <li className="flex flex-col gap-3 w-40" key={itensinfor.id}>
                     <img className="w-25 lg:w-40 mx-auto lg:mx-0" src={itensinfor.imgBook}/>
@@ -143,7 +143,7 @@ const Cart= ()=>{
                     </div>
                     <button onClick={()=> deleteitenincart(itensinfor.id)} className="w-max mx-auto px-6 lg:px-8 py-[.2em] lg:py-[.4em] font-bold text-white rounded-3xl bg-[#00ccbe] hover:bg-[#00ccbe]/50 cursor-pointer">Delete</button>
                 </li>
-            )) : <p className="text-[1em] text-[#bbbbbb] font-semibold mx-auto my-auto">Empty cart</p>}
+            )) : <p className="text-[1em] text-[#bbbbbb] font-semibold mx-auto my-auto">carrinho vasio</p>}
             </ul>
          <div className="w-max px-5 lg:px-10 py-4 h-max flex flex-row lg:flex-col lg:items-center justify-center m-auto gap-4 lg:gap-9 rounded-[15px]">
            <div className="flex flex-row justify-between rounded-[5px] w-34 lg:w-50">

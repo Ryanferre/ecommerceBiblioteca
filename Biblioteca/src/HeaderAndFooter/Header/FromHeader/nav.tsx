@@ -33,7 +33,7 @@ const NavFromHeader= ()=>{
               <SignedOut>
               <SignInButton>
                 <button className="px-5 py-[.4em] font-bold text-[#bbbbbb] hover:text-white rounded-3xl hover:bg-[#00ccbe]/50 cursor-pointer">
-                  Login
+                  sing In
                 </button>
               </SignInButton>
               </SignedOut>

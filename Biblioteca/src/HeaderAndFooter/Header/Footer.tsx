@@ -4,12 +4,12 @@ const Footer= ()=>{
     return(
         <section className="w-full h-50 flex flex-row justify-around mt-10 items-center bg-[#00ccbe]">
             <div>
-                <p className="text-[1em] text-white font-semibold">&copy;: Bifly</p>
+                <p className="text-[1em] text-white font-semibold">&copy;: Bitfly</p>
                 <p className="text-[1em] text-white font-semibold">Privacy policy</p>
                 <p className="text-[1em] text-white font-semibold">Cookies policy</p>
             </div>
-            <div className="flex flex-col items-center gap-5">
-                <h2 className="text-white"><Link to="/"><h1 className="text-3xl font-bold">Bifly</h1></Link></h2>
+            <div className="flex flex-col items-center w-[70%] gap-5">
+                <h2 className="text-white"><Link to="/"><h1 className="text-3xl font-bold">Bitfly</h1></Link></h2>
                     <ul className="flex flex-row w-35 border-t-1 pt-5 border-white lg:w-[169px] justify-between">
                         <li className="border border-white p-[.4em] lg:p-[8px] flex flex-col items-center justify-center rounded-[50px]" style={{boxShadow: '1px 2px 3px gray'}}>
                             <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://pt-br.facebook.com/login/device-based/regular/login/&ved=2ahUKEwj5i8impKCKAxULO7kGHdn7HkUQmuEJegQIEhAB&usg=AOvVaw2MezuOQmbz6LjDCjlRi0-K"><FaFacebook color="white" /></a>
@@ -27,6 +27,9 @@ const Footer= ()=>{
                             <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://br.linkedin.com/company/login&ved=2ahUKEwiMmZ2xo6CKAxUiG7kGHY3CMwYQmuEJegQIEhAB&usg=AOvVaw3nMEdONgcpgqgK2S1gXGj_"><FaLinkedin color="white" /></a>
                         </li>
                     </ul>
+                    <div className="w-[70%]">
+                      <p className="text-[.8em] text-white" >A BitFly é uma plataforma independente de comparação de preços e organização literária. Como participante de programas de afiliados (incluindo o Programa de Associados da Amazon e redes parceiras), nós podemos receber uma pequena comissão por compras qualificadas realizadas através dos nossos links, sem nenhum custo adicional para você.</p>
+                    </div>
             </div>
             <div>
                 <p className="text-[1em] text-white font-semibold"><Link to="/">Home</Link></p>
