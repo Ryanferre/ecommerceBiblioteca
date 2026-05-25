@@ -3,26 +3,119 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-//tabela dos produtos
-model inforbook {
-  id              Int      @id @default(autoincrement())
-  emailUser       String?  @db.VarChar(50)
-  nameAutorBook   String   @db.VarChar(20)
-  titleBook       String?  @db.VarChar(100)
-  priceBook       Decimal? @db.Decimal(10, 2)
-  descriptionBook String   @db.Text
-  imgBook         String?  @db.VarChar(255)
-  carts           cart[]
+// 1. Entidade de Usuários (Clientes)
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  clerkUserId  String   @unique
+  email        String   @unique
+  createdAt    DateTime @default(now())
+
+  // Relações
+  compras   Order[]     // Histórico de compras
+  carrinho  CartItem[]  // Livros no carrinho
+  favoritos Favorite[]  // Livros nos favoritos
 }
 
-//tabela de carrinho
-model cart {
-  id              Int      @id @default(autoincrement())
-  emailUser       String?  @db.VarChar(50)
-  product_id Int
-  product    inforbook @relation(fields: [product_id], references: [id]) 
+// 2. Entidade de Vendedoras (Lojas/Parceiros)
+model Seller {
+  id        String   @id @default(uuid())
+  nome_loja String
+  email     String   @unique
+  createdAt DateTime @default(now())
+
+  // Relações
+  livros    Book[]   // Livros vinculados a esta vendedora
+}
+
+// 3. Entidade Principal: Livros
+model Book {
+  id                 String   @id @default(uuid())
+  asin               String?  @unique
+  titulo             String
+  autor              String
+  product_star_rating String
+  product_num_ratings String
+  book_format        String
+  product_url        String
+  delivery           String
+  preco_original     Decimal  @db.Decimal(10, 2) // Preço cheio sem desconto
+  preco_desconto     Decimal  @db.Decimal(10, 2) // Preço atual com desconto
+  url_capa           String?
+  description        String?
+  createdAt          DateTime @default(now())
+
+  // Chave Estrangeira para Vendedora
+  sellerId           String
+  vendedora          Seller   @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+
+  // Relações Reversas para Tabelas de Junção
+  no_carrinho        CartItem[]
+  nos_favoritos      Favorite[]
+  em_alertas         Alert[]
+  em_itens_pedido    OrderItem[]
+}
+
+// 4. Tabela de Junção: Carrinho de Compras
+model CartItem {
+  id        String   @id @default(uuid())
+  userId    String
+  bookId    String
+  quantidade Int     @default(1)
+
+  usuario   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  livro     Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, bookId]) // Impede o mesmo livro duplicar em linhas diferentes para o mesmo usuário
+}
+
+// 5. Tabela de Junção: Favoritos (Lista de Desejos / Espera de remessa)
+model Favorite {
+  id        String   @id @default(uuid())
+  userId    String
+  bookId    String
+  createdAt DateTime @default(now())
+
+  usuario   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  livro     Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, bookId])
+}
+
+// 6. Tabela de Alertas (Livros que entrou em desconto)
+model Alert {
+  id         String   @id @default(uuid())
+  bookId     String   @unique // Um livro gera um alerta por vez
+  mensagem   String
+  createdAt  DateTime @default(now())
+
+  livro      Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+}
+
+// 7. Entidade de Pedidos (Cabeçalho do Histórico de Compras)
+model Order {
+  id         String   @id @default(uuid())
+  userId     String
+  valor_total Decimal @db.Decimal(10, 2)
+  status     String   // Ex: "PENDENTE", "PAGO", "CANCELADO"
+  createdAt  DateTime @default(now())
+
+  usuario    User     @relation(fields: [userId], references: [id])
+  itens      OrderItem[]
+}
+
+// 8. Itens do Pedido (Onde salvamos o preço exato que o usuário pagou no momento da compra)
+model OrderItem {
+  id           String   @id @default(uuid())
+  orderId      String
+  bookId       String
+  quantidade   Int
+  preco_pago   Decimal  @db.Decimal(10, 2) // Registra o preço histórico do desconto
+
+  pedido       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  livro        Book     @relation(fields: [bookId], references: [id])
 }
