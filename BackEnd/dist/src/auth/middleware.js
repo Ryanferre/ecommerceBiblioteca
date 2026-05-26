@@ -8,11 +8,10 @@ const authPlugin = async (fastify) => {
             console.log("passando pelo options");
             return;
         }
-        console.log("midlleware chamado com a rota: ", request.url);
-        const cronSecret = request.headers['x-cron-secret'];
-        if (request.url == "/getstartpromotions" && cronSecret === process.env.CRON_SECRET_KEY) {
+        if (request.url == "/getstartpromotions") {
             return;
         }
+        console.log("midlleware chamado com a rota: ", request.url);
         const auth = request.headers?.authorization;
         if (!auth?.startsWith("Bearer ")) {
             return reply.status(401).send({ error: "Missing service token" });
