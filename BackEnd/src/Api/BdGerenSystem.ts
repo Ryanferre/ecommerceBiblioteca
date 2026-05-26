@@ -3,6 +3,8 @@ import 'dotenv'
 import prisma from '../lib/prisma.js';
 import { cleanBookingAmazonData } from './funções_de_interacoes/cleanDataAmazon.js';
 
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 async function pagnetBookAmazon(quant: number){
 
     const url = new URL(`https://real-time-amazon-data.p.rapidapi.com/search?query=livros&page=${quant}&country=BR&sort_by=RELEVANCE&product_condition=ALL&is_prime=false&deals_and_discounts=NONE`);
@@ -34,12 +36,14 @@ export async function getBookInAmazon(request: any, reply: any){
            
             let quantPageAmazon= 1
 
-            while(quantPageAmazon < 10){
+            while(quantPageAmazon <= 10){
                 const BookinFromAmazon= await pagnetBookAmazon(quantPageAmazon)
 
                 cleanBookingAmazonData(BookinFromAmazon)
 
                 quantPageAmazon++
+
+                await sleep(2000);
             }
 
             if(quantPageAmazon == 10){

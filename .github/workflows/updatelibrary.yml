@@ -1,0 +1,26 @@
+name: Disparar Endpoint Externo
+
+# Define quando o GitHub vai rodar esse script
+on:
+ on:
+  schedule:
+    # Roda todos os dias à meia-noite (Horário UTC)
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Mantém o botão de rodar manualmente 
+
+jobs:
+  chamar-api:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Passo padrão para baixar o código do repositório
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      # 2. Faz a chamada HTTP usando cURL
+      - name: Chamar Endpoint do Backend
+        run: |
+          curl -X POST "https://ecommercebiblioteca.onrender.com/getstartpromotions" \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer ${{ secrets.MINHA_API_SECRET_KEY }}" \
+          -d '{"origem": "github-actions", "status": "disparado"}'
