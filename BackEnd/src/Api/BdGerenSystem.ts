@@ -36,6 +36,8 @@ export async function getBookInAmazon(request: any, reply: any){
             let quantPageAmazon= 1
 
             for(let i =0; i <= quantPageAmazon; i++){
+
+                console.log("x: ", i)
                 const BookinFromAmazon= await pagnetBookAmazon(quantPageAmazon)
 
                 console.log("dados retorado ao se conectar a amazon: ", BookinFromAmazon)
