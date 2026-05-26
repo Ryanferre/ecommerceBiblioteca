@@ -42,6 +42,8 @@ export async function getBookInAmazon(request: any, reply: any){
                 const BookinFromAmazon= await pagnetBookAmazon(quantPageAmazon)
                 console.log("dados retorado ao se conectar a amazon: ", BookinFromAmazon)
 
+                await sleep(2000)
+
                 //await cleanBookingAmazonData(BookinFromAmazon)
             }
 
