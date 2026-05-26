@@ -15,14 +15,6 @@ const authPlugin: FastifyPluginAsync = async (fastify) => {
 
     console.log("midlleware chamado com a rota: ", request.url)
 
-    const cronSecret = request.headers['x-cron-secret'];
-
-    if(request.url == "/getstartpromotions" && cronSecret === process.env.CRON_SECRET_KEY){
-
-      console.log("dados da url /getstartpromotions: ", cronSecret)
-      return
-    }
-
     const auth = request.headers?.authorization;
 
     if (!auth?.startsWith("Bearer ")) {
