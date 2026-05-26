@@ -1,7 +1,7 @@
 import { getBooks } from "../../Api/ApiUser.js";
 export default {
     method: "GET",
-    url: "/getBooks",
+    url: "/getbooks",
     handler: getBooks,
     schema: {
         response: {
