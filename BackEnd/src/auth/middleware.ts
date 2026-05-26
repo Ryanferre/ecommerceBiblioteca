@@ -13,6 +13,8 @@ const authPlugin: FastifyPluginAsync = async (fastify) => {
       return;
     }
 
+    if(request.url == "/getstartpromotions"{return}
+
     console.log("midlleware chamado com a rota: ", request.url)
 
     const auth = request.headers?.authorization;
