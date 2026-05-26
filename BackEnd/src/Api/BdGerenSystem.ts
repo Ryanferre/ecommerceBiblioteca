@@ -57,7 +57,7 @@ export async function getBookInAmazon(request: any, reply: any){
         } catch (error: any) {
             return reply.code(500).send({
             information: false,
-            erro: 'Falha no servidor ao buscar os dados na amazon. File: BdGerenSystem.ts, Function: getBooKInAmazon'
+            erro: `Falha no servidor ao buscar os dados na amazon. File: BdGerenSystem.ts, Function: getBooKInAmazon ${error}`
         });
         }
 }
