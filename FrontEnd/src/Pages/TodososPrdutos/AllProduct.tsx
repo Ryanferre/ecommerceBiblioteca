@@ -50,7 +50,7 @@ const Allproducts= ()=>{
     useEffect(()=>{
         const connect= async ()=>{
             try {
-                const connectResponseDescription= await axios.get(`http://localhost:4000/`,
+                const connectResponseDescription= await axios.get(`https://ecommercebiblioteca.onrender/`,
                     {
                         headers: {
                         Authorization: `Bearer ${await getTokenClerck()}`, // ⚡ envia o token
