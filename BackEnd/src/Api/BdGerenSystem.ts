@@ -15,6 +15,7 @@ async function pagnetBookAmazon(quant: number){
             method: 'GET',
             headers: {
                 // Coloque a sua chave da RapidAPI aqui
+                'Content-Type': 'application/json',
                 'x-rapidapi-key': process.env.amazon_searchAPI,
                 'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
             }
