@@ -35,14 +35,12 @@ export async function getBookInAmazon(request: any, reply: any){
            
             let quantPageAmazon= 1
 
-            while(quantPageAmazon <= 10){
+            for(let i =0; i <= quantPageAmazon; i++){
                 const BookinFromAmazon= await pagnetBookAmazon(quantPageAmazon)
 
                 console.log("dados retorado ao se conectar a amazon: ", BookinFromAmazon)
 
                 cleanBookingAmazonData(BookinFromAmazon)
-
-                quantPageAmazon++
 
                 await sleep(2000);
             }
