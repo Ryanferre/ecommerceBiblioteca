@@ -21,9 +21,6 @@ async function pagnetBookAmazon(quant: number){
             });
 
             // Verifica se a resposta foi bem-sucedida (status 200-299)
-            if (!response.ok) {
-              throw new Error(`Erro na API: ${response.status} ${response.statusText}`);
-            }
 
             // Converte a resposta em JSON
             const data: any = await response.json();
@@ -38,6 +35,8 @@ export async function getBookInAmazon(request: any, reply: any){
 
             while(quantPageAmazon <= 10){
                 const BookinFromAmazon= await pagnetBookAmazon(quantPageAmazon)
+
+                console.log("dados retorado ao se conectar a amazon: ", BookinFromAmazon)
 
                 cleanBookingAmazonData(BookinFromAmazon)
 
