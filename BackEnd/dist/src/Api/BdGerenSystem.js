@@ -19,6 +19,7 @@ async function pagnetBookAmazon(quant) {
     return data.data.products;
 }
 export async function getBookInAmazon(request, reply) {
+    console.log("chamada na getBookInAmazon");
     // Construção da URL com os parâmetros de busca
     try {
         let quantPageAmazon = 1;

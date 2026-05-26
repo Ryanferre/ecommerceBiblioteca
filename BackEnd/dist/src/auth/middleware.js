@@ -8,7 +8,7 @@ const authPlugin = async (fastify) => {
             console.log("passando pelo options");
             return;
         }
-        if (request.url == "/getstartpromotions") {
+        if (request.url === "/getstartpromotions") {
             return;
         }
         console.log("midlleware chamado com a rota: ", request.url);
