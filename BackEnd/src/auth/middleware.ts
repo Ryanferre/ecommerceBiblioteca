@@ -18,6 +18,8 @@ const authPlugin: FastifyPluginAsync = async (fastify) => {
     const cronSecret = request.headers['x-cron-secret'];
 
     if(request.url == "/getstartpromotions" && cronSecret === process.env.CRON_SECRET_KEY){
+
+      console.log("dados da url /getstartpromotions: ", cronSecret)
       return
     }
 
