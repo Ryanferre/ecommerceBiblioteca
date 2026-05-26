@@ -49,7 +49,7 @@ const UlAnuciante= ()=>{
 
         const connect= async ()=>{
             try {
-                const connectResponseDescription= await axios.get(`https://ecommercebiblioteca.onrender.com/getBooks`,
+                const connectResponseDescription= await axios.get(`https://ecommercebiblioteca.onrender.com/getbooks`,
                     {
                         headers: {
                         Authorization: `Bearer ${await getTokenClerck()}`, // ⚡ envia o token
