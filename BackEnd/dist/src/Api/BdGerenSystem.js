@@ -1,27 +1,38 @@
 import 'dotenv';
 import prisma from '../lib/prisma.js';
 import { cleanBookingAmazonData } from './funções_de_interacoes/cleanDataAmazon.js';
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+async function pagnetBookAmazon(quant) {
+    const url = new URL('https://real-time-amazon-data.p.rapidapi.com/search?query=livros&page=1&country=BR&sort_by=LOWEST_PRICE&product_condition=ALL&is_prime=false&deals_and_discounts=NONE');
+    // Faz a requisição HTTP usando o fetch nativo
+    const response = await fetch(url.toString(), {
+        method: 'GET',
+        headers: {
+            // Coloque a sua chave da RapidAPI aqui
+            'x-rapidapi-key': process.env.amazon_searchAPI,
+            'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
+        }
+    });
+    // Verifica se a resposta foi bem-sucedida (status 200-299)
+    if (!response.ok) {
+        throw new Error(`Erro na API: ${response.status} ${response.statusText}`);
+    }
+    // Converte a resposta em JSON
+    const data = await response.json();
+    return data.data.products;
+}
 export async function getBookInAmazon(request, reply) {
     // Construção da URL com os parâmetros de busca
-    const url = new URL('https://real-time-amazon-data.p.rapidapi.com/search?query=livros&page=1&country=BR&sort_by=RELEVANCE&product_condition=ALL&is_prime=false&deals_and_discounts=NONE');
     try {
-        // Faz a requisição HTTP usando o fetch nativo
-        const response = await fetch(url.toString(), {
-            method: 'GET',
-            headers: {
-                // Coloque a sua chave da RapidAPI aqui
-                'x-rapidapi-key': process.env.amazon_searchAPI,
-                'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
-            }
-        });
-        // Verifica se a resposta foi bem-sucedida (status 200-299)
-        if (!response.ok) {
-            throw new Error(`Erro na API: ${response.status} ${response.statusText}`);
+        let quantPageAmazon = 1;
+        while (quantPageAmazon <= 10) {
+            const BookinFromAmazon = await pagnetBookAmazon(quantPageAmazon);
+            cleanBookingAmazonData(BookinFromAmazon);
+            quantPageAmazon++;
+            await sleep(2000);
         }
-        // Converte a resposta em JSON
-        const data = await response.json();
-        const BookinFromAmazon = data.data.products;
-        cleanBookingAmazonData(BookinFromAmazon);
+        if (quantPageAmazon == 10) {
+        }
         return {
             information: true
         };
@@ -29,7 +40,7 @@ export async function getBookInAmazon(request, reply) {
     catch (error) {
         return reply.code(500).send({
             information: false,
-            erro: 'Falha no servidor ao buscar os dados na amazon. File: BdGerenSystem.ts, Function: getBooKInAmazon'
+            erro: `Falha no servidor ao buscar os dados na amazon. File: BdGerenSystem.ts, Function: getBooKInAmazon ${error}`
         });
     }
 }
@@ -69,7 +80,7 @@ export async function addedDescription(request, reply) {
     catch (error) {
         return reply.code(500).send({
             information: false,
-            erro: 'Falha no servidor ao buscar os dados na amazon. File: BdGerenSystem.ts, Function: getBooKInAmazon'
+            erro: 'Falha no servidor ao buscar os dados na amazon. File: BdGerenSystem.ts, Function: addedDescription'
         });
     }
 }
