@@ -1,4 +1,4 @@
-name: Disparar Endpoint com Clerk
+name: Disparar Endpoint com Clerk (cURL)
 
 on:
   workflow_dispatch:
@@ -9,41 +9,58 @@ jobs:
   chamar-api:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout do código
         uses: actions/checkout@v4
 
-      - name: Instalar o SDK do Clerk
-        run: npm install @clerk/backend
-
-      - name: Gerar Token e Chamar API
+      # Usamos o Node que já vem instalado no ambiente do GitHub para gerar o Token do Clerk
+      - name: Gerar Token e Chamar API via cURL
         env:
           CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
-          # Defina o ID do usuário que o robô vai "simular"
-          USER_ID: ${{ secrets.CLERK_USER_ID_BOT }} 
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const { createClerkClient } = require('@clerk/backend');
-            const clerk = createClerkClient({ secretKey: process.env.CLERK_SECRET_KEY });
-            
-            async function run() {
-              // Cria um token válido para o usuário simulando a sessão
-              const token = await clerk.tokens.createToken(process.env.USER_ID);
+          USER_ID: ${{ secrets.CLERK_USER_ID_BOT }}
+        run: |
+          node -e "
+          const { createHmac } = require('crypto');
+
+          async function init() {
+            try {
+              // 1. Criar o cabeçalho e corpo do JWT estruturado para o Clerk
+              const header = Buffer.from(JSON.stringify({ alg: 'HS256', typ: 'JWT' })).toString('base64url');
+              const now = Math.floor(Date.now() / 1000);
               
-              // Faz a chamada HTTP para a sua API enviando o Bearer Token
+              const payload = Buffer.from(JSON.stringify({
+                sub: process.env.USER_ID,
+                iat: now,
+                exp: now + 60 // Token válido por 1 minuto
+              })).toString('base64url');
+
+              // 2. Assinar o token com a Secret Key do Clerk
+              const signature = createHmac('sha256', process.env.CLERK_SECRET_KEY)
+                .update(\`\${header}.\${payload}\`)
+                .digest('base64url');
+
+              const token = \`\${header}.\${payload}.\${signature}\`;
+
+              console.log('Token gerado com sucesso. Disparando API no Render...');
+
+              // 3. Fazer a chamada HTTP para o seu backend
               const response = await fetch('https://ecommercebiblioteca.onrender.com/getstartpromotions', {
                 method: 'POST',
                 headers: {
-                  'Authorization': `Bearer ${token}`,
+                  'Authorization': \`Bearer \${token}\`,
                   'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ origem: 'github-actions' })
               });
-              
+
               if (!response.ok) {
-                throw new Error(`Erro na API: ${response.statusText}`);
+                throw new Error(\`Erro na API: \${response.status} \${response.statusText}\`);
               }
-              console.log('API chamada com sucesso!');
+
+              console.log('API executada com sucesso!');
+            } catch (err) {
+              console.error(err);
+              process.exit(1);
             }
-            
-            return run();
+          }
+          init();
+          "
