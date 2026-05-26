@@ -7,7 +7,7 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function pagnetBookAmazon(quant: number){
 
-    const url = new URL('https://real-time-amazon-data.p.rapidapi.com/search?query=livros&page=1&country=BR&sort_by=LOWEST_PRICE&product_condition=ALL&is_prime=false&deals_and_discounts=NONE');
+    const url = new URL(`https://real-time-amazon-data.p.rapidapi.com/search?query=livros&page=${quant}&country=BR&sort_by=LOWEST_PRICE&product_condition=ALL&is_prime=false&deals_and_discounts=NONE`);
 
 
      // Faz a requisição HTTP usando o fetch nativo
