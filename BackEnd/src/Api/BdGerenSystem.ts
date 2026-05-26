@@ -7,7 +7,7 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function pagnetBookAmazon(quant: number){
 
-    const url = new URL(`https://real-time-amazon-data.p.rapidapi.com/search?query=livros&page=1&country=BR&sort_by=RELEVANCE&product_condition=ALL&is_prime=false&deals_and_discounts=NONE`);
+    const url = new URL('https://real-time-amazon-data.p.rapidapi.com/search?query=livros&page=1&country=BR&sort_by=LOWEST_PRICE&product_condition=ALL&is_prime=false&deals_and_discounts=NONE');
 
 
      // Faz a requisição HTTP usando o fetch nativo
@@ -104,7 +104,7 @@ export async function addedDescription(request: any, reply: any){
             } catch (error: any) {
                 return reply.code(500).send({
                 information: false,
-                erro: 'Falha no servidor ao buscar os dados na amazon. File: BdGerenSystem.ts, Function: getBooKInAmazon'
+                erro: 'Falha no servidor ao buscar os dados na amazon. File: BdGerenSystem.ts, Function: addedDescription'
             });
             }
 }
