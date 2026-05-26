@@ -6,7 +6,7 @@ import cors from '@fastify/cors'
 
 import authPlugin from "./src/auth/middleware.js";
 
-import getBooks from "./src/routes/routeUser/getBooks.js"
+import getbooks from "./src/routes/routeUser/getBooks.js"
 import decriptionFromBook from "./src/routes/routerlibrary/getDescription.js"
 import routerUserCreate from "./src/routes/routeUser/createUser.js"
 import routeDataBookGerenc from "./src/routes/routerlibrary/startGetBookInPartners.js"
@@ -31,7 +31,7 @@ const main = async()=>{
     await ServerMain.register(authPlugin);
 
     //rotas
-    ServerMain.route(getBooks)
+    ServerMain.route(getbooks)
     ServerMain.route(routerUserCreate)
     ServerMain.route(routeDataBookGerenc)
     ServerMain.route(decriptionFromBook)
