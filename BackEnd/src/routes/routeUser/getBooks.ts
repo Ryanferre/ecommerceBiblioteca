@@ -2,7 +2,7 @@ import { getBooks } from "../../Api/ApiUser.js"
 
 export default {
     method: "GET",
-    url: "/",
+    url: "/getBooks",
     handler: getBooks, 
     schema: {
         response: {
