@@ -33,9 +33,9 @@ export async function getBookInAmazon(request: any, reply: any){
         // Construção da URL com os parâmetros de busca
         try {
            
-            let quantPageAmazon= 1
+            let quantPageAmazon= 10
 
-            for(let i =0; i <= quantPageAmazon; i++){
+            for(let i = 0; i <= quantPageAmazon; i++){
 
                 console.log("x: ", i)
                 const BookinFromAmazon= await pagnetBookAmazon(quantPageAmazon)
