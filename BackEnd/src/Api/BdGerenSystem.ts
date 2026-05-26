@@ -25,7 +25,7 @@ async function pagnetBookAmazon(quant: number){
 
             // Converte a resposta em JSON
             const data: any = await response.json();
-            return data;
+            return data.data.products;
 }
 
 export async function getBookInAmazon(request: any, reply: any){
