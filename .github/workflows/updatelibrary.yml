@@ -31,7 +31,7 @@ jobs:
               const token = await clerk.tokens.createToken(process.env.USER_ID);
               
               // Faz a chamada HTTP para a sua API enviando o Bearer Token
-              const response = await fetch('https://seu-app-no-render.onrender.com/api/v1/sua-rota', {
+              const response = await fetch('https://ecommercebiblioteca.onrender.com/getstartpromotions', {
                 method: 'POST',
                 headers: {
                   'Authorization': `Bearer ${token}`,
