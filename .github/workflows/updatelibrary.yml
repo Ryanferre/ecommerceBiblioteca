@@ -46,7 +46,7 @@ jobs:
 
               // 3. Fazer a chamada HTTP para o seu backend
               const response = await fetch('https://ecommercebiblioteca.onrender.com/getstartpromotions', {
-                method: 'POST',
+                method: 'GET',
                 headers: {
                   'Authorization': \`Bearer \${token}\`,
                   'Content-Type': 'application/json'
