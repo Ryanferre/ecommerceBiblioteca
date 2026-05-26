@@ -50,8 +50,7 @@ jobs:
                 headers: {
                   'Authorization': \`Bearer \${token}\`,
                   'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ origem: 'github-actions' })
+                }
               });
 
               if (!response.ok) {
