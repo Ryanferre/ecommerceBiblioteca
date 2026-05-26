@@ -22,15 +22,12 @@ export async function getBookInAmazon(request, reply) {
     console.log("chamada na getBookInAmazon");
     // Construção da URL com os parâmetros de busca
     try {
-        let quantPageAmazon = 1;
-        while (quantPageAmazon <= 10) {
+        let quantPageAmazon = 10;
+        for (let i = 0; i <= quantPageAmazon; i++) {
+            console.log("x: ", i);
             const BookinFromAmazon = await pagnetBookAmazon(quantPageAmazon);
             console.log("dados retorado ao se conectar a amazon: ", BookinFromAmazon);
-            cleanBookingAmazonData(BookinFromAmazon);
-            quantPageAmazon++;
-            await sleep(2000);
-        }
-        if (quantPageAmazon == 10) {
+            await cleanBookingAmazonData(BookinFromAmazon);
         }
         return {
             information: true
